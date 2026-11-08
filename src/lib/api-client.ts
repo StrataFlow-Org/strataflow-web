@@ -1,6 +1,8 @@
 import { getSessionToken, clearSessionToken } from './session';
 
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+export function getApiBaseUrl(): string {
+  return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+}
 
 export interface ApiResponse<T = unknown> {
   success: boolean;
@@ -13,7 +15,7 @@ export async function apiRequest<T = unknown>(
   endpoint: string,
   options: RequestInit = {}
 ): Promise<ApiResponse<T>> {
-  const url = `${API_BASE_URL}${endpoint.startsWith('/') ? endpoint : `/${endpoint}`}`;
+  const url = `${getApiBaseUrl()}${endpoint.startsWith('/') ? endpoint : `/${endpoint}`}`;
   const token = getSessionToken();
 
   const headers: Record<string, string> = {
