@@ -3,6 +3,7 @@ import { StrKey } from '@stellar/stellar-sdk';
 export const STELLAR_CONFIG = {
   network: process.env.NEXT_PUBLIC_STELLAR_NETWORK || 'TESTNET',
   rpcUrl: process.env.NEXT_PUBLIC_SOROBAN_RPC_URL || 'https://soroban-testnet.stellar.org',
+  horizonUrl: process.env.NEXT_PUBLIC_HORIZON_URL || 'https://horizon-testnet.stellar.org',
   contractId:
     process.env.NEXT_PUBLIC_STRATAFLOW_CONTRACT_ID ||
     'CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2KM',
