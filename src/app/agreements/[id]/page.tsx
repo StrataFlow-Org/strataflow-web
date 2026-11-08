@@ -19,6 +19,7 @@ import {
   RefreshCw,
 } from 'lucide-react';
 import { useWallet } from '../../../context/WalletContext';
+import { useToast } from '../../../context/ToastContext';
 import { truncateAddress } from '../../../lib/stellar';
 import { formatCurrencyAmount, stroopsToXlm, xlmToStroops } from '../../../lib/account-balance';
 import { SorobanTxPipeline, sorobanPipeline } from '../../../lib/soroban-tx';
@@ -62,6 +63,7 @@ export default function AgreementDetailPage() {
   const params = useParams();
   const onChainId = (params?.id as string) || '1';
   const { address, isConnected, signTransaction, openWalletModal, network } = useWallet();
+  const { showSuccess, showError, showTransaction } = useToast();
 
   const [agreement, setAgreement] = useState<AgreementDetail | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -202,12 +204,14 @@ export default function AgreementDetailPage() {
       }
 
       setSuccessTxHash(result.hash);
+      showTransaction(`Action "${method}" Confirmed`, result.hash);
       setActionMessage('');
       // Refresh agreement details
       await fetchAgreement();
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Action failed';
       setErrorMessage(msg);
+      showError(`Execution of ${method} Failed`, msg);
     } finally {
       setIsProcessing(false);
       setActionMessage('');

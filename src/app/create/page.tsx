@@ -17,6 +17,7 @@ import {
   Loader2,
 } from 'lucide-react';
 import { useWallet } from '../../context/WalletContext';
+import { useToast } from '../../context/ToastContext';
 import { isValidStellarAddress, isValidContractAddress } from '../../lib/stellar';
 import { SUPPORTED_TOKENS, getTokenConfig } from '../../lib/tokens';
 import { xlmToStroops, formatCurrencyAmount } from '../../lib/account-balance';
@@ -33,6 +34,7 @@ interface MilestoneInput {
 export default function CreateAgreementPage() {
   const router = useRouter();
   const { address, isConnected, signTransaction, openWalletModal, network } = useWallet();
+  const { showSuccess, showError, showTransaction } = useToast();
 
   // Wizard Step: 1 = Details, 2 = Milestones, 3 = Review & Execute
   const [step, setStep] = useState<number>(1);
@@ -234,11 +236,13 @@ export default function CreateAgreementPage() {
       }
 
       setSuccessTxHash(result.hash);
+      showTransaction('Escrow Deployed Successfully', result.hash);
       localStorage.removeItem('strataflow_draft_escrow');
       setStatusMessage('');
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Transaction submission failed';
       setErrorMessage(msg);
+      showError('Failed to Deploy Escrow', msg);
     } finally {
       setIsSubmitting(false);
       setStatusMessage('');
