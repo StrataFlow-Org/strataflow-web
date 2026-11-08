@@ -27,6 +27,15 @@
 
 ## 🚀 Quick Start
 
+### Connected Stellar Testnet Contract
+
+| Parameter | Value |
+|---|---|
+| **Contract ID** | `CDXVD3AA43SE2D52ZBJSH3RDKAPOYG6OCDAZGSQD6M5TCBQIG3HTLY6J` |
+| **Network** | Stellar Testnet (`https://soroban-testnet.stellar.org`) |
+| **Admin Address** | `GBWFZHBYEKF5MR2MHW7JAZX6ZRI2PKKBL6IALEMJSBMU4JMDSIB34KP5` |
+| **StellarExpert** | [View On-Chain Contract](https://stellar.expert/explorer/testnet/contract/CDXVD3AA43SE2D52ZBJSH3RDKAPOYG6OCDAZGSQD6M5TCBQIG3HTLY6J) |
+
 ### 1. Install Dependencies
 ```bash
 npm install --ignore-scripts
