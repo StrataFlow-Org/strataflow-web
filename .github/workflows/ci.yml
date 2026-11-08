@@ -8,14 +8,26 @@ on:
 
 jobs:
   build:
+    name: Build & Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Use Node.js 20.x
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
           cache: 'npm'
-      - run: npm ci
-      - run: npm run build
 
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Run unit test suite
+        run: npm test
+
+      - name: Build Next.js production bundle
+        run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
+          NEXT_PUBLIC_STELLAR_NETWORK: TESTNET
+          NEXT_PUBLIC_STRATAFLOW_CONTRACT_ID: CDLZ73VU7Y4Z45ETK26QU62NDXQJ2277NY2Y57C2ZFU7SS7M6HWT7G4H
