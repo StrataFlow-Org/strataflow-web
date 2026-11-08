@@ -83,9 +83,8 @@ export class SorobanTxPipeline {
   ) {
     const netConfig = getActiveNetwork(this.networkId);
 
-    // Fetch account sequence from RPC
-    const accountResponse = await this.server.getAccount(senderAddress);
-    const sourceAccount = new Account(senderAddress, accountResponse.sequence);
+    // Fetch account from RPC (returns an Account instance with sequence number)
+    const sourceAccount = await this.server.getAccount(senderAddress);
 
     const tx = new TransactionBuilder(sourceAccount, {
       fee: '1000',
