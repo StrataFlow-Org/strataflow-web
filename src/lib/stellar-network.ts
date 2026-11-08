@@ -45,7 +45,9 @@ export const NETWORKS: Record<StellarNetworkId, NetworkConfig> = {
 };
 
 export function getActiveNetwork(networkId?: string): NetworkConfig {
-  const target = (networkId || process.env.NEXT_PUBLIC_STELLAR_NETWORK || 'TESTNET').toUpperCase() as StellarNetworkId;
+  let normalized = (networkId || process.env.NEXT_PUBLIC_STELLAR_NETWORK || 'TESTNET').toUpperCase();
+  if (normalized === 'PUBLIC') normalized = 'MAINNET';
+  const target = normalized as StellarNetworkId;
   return NETWORKS[target] || NETWORKS.TESTNET;
 }
 
