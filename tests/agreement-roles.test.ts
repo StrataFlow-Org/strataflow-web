@@ -41,3 +41,4 @@ test('Agreement Roles & Permissions Logic Tests', async (t) => {
     assert.strictEqual(canArbitrate(client, 'DISPUTED'), false);
   });
 });
+

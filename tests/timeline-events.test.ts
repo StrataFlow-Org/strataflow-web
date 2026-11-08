@@ -66,3 +66,4 @@ describe('Agreement Event Stream & Timeline Formatting Tests', () => {
     assert.strictEqual(formatLedger(1000000), '1,000,000');
   });
 });
+

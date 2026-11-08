@@ -58,3 +58,4 @@ export interface ProtocolStats {
   totalVolumeUsdc: string;
   activeDisputes: number;
 }
+

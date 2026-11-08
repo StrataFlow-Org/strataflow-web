@@ -44,3 +44,4 @@ export class StellarAnchorService {
     return `${anchor.sep24Url}/transactions/deposit/interactive?${params.toString()}`;
   }
 }
+

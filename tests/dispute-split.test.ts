@@ -32,3 +32,4 @@ test('Dispute Split Calculation Unit Tests', async () => {
   assert.strictEqual(split0.clientAmount, 0n);
   assert.strictEqual(split0.providerAmount, totalBalance);
 });
+

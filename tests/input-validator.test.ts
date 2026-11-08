@@ -50,3 +50,4 @@ describe('Input Validator & Client Sanitizer Tests', () => {
     assert.ok(zeroAmount.errors[0].includes('greater than 0'));
   });
 });
+

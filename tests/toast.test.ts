@@ -45,3 +45,4 @@ describe('Toast Notification State & Helper Tests', () => {
     assert.strictEqual(queue[4], 'toast-10');
   });
 });
+

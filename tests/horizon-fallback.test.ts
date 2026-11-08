@@ -48,3 +48,4 @@ describe('HorizonFallbackService Unit Tests', () => {
     assert.strictEqual(result, null);
   });
 });
+

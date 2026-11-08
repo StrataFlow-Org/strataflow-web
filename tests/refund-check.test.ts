@@ -38,3 +38,4 @@ test('Timeout Refund Eligibility Logic Tests', async (t) => {
     assert.strictEqual(isEligibleForRefund(other, client, 'FUNDED', expiredDeadline), false);
   });
 });
+

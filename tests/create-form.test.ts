@@ -43,3 +43,4 @@ test('Escrow Creation Form Input Validation Tests', async (t) => {
     assert.strictEqual(isValid, true);
   });
 });
+

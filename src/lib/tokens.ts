@@ -39,3 +39,4 @@ export function getTokenConfig(codeOrAddress: string): TokenConfig {
     isNative: false,
   };
 }
+

@@ -39,3 +39,4 @@ describe('Navbar Navigation Routes & Drawer State Logic Tests', () => {
     assert.strictEqual(isMobileOpen, false);
   });
 });
+

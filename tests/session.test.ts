@@ -30,3 +30,4 @@ test('Session Token Decoding Tests', async (t) => {
     assert.strictEqual(decodeSessionToken(''), null);
   });
 });
+

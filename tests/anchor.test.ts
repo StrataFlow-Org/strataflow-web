@@ -32,3 +32,4 @@ describe('StellarAnchorService Unit Tests', () => {
     assert.strictEqual(anchor, null);
   });
 });
+

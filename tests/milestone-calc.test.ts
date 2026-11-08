@@ -17,3 +17,4 @@ test('Milestone Percentage & Total Budget Calculation Tests', async () => {
   const sumPercentages = percentages.reduce((a, b) => a + b, 0);
   assert.strictEqual(sumPercentages, 100);
 });
+

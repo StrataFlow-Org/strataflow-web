@@ -28,3 +28,4 @@ test('Stroop & Balance Formatting Unit Tests', async (t) => {
     assert.strictEqual(formatCurrencyAmount('1000000', 2), '1,000,000.00');
   });
 });
+

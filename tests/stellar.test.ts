@@ -43,3 +43,4 @@ test('Stellar Address Utilities Unit Tests', async (t) => {
     assert.strictEqual(truncateAddress('ABC'), 'ABC');
   });
 });
+

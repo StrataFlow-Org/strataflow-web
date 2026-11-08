@@ -29,3 +29,4 @@ describe('ErrorBoundary Component Logic Tests', () => {
     assert.strictEqual(state.error, undefined);
   });
 });
+

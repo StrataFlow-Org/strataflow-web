@@ -25,3 +25,4 @@ test('Agreement On-Chain Action Invocations Integration Tests', async (t) => {
     assert.strictEqual(args.length, 1);
   });
 });
+

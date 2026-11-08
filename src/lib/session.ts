@@ -64,3 +64,4 @@ export function getSessionAddress(): string | null {
   const session = decodeSessionToken(token);
   return session?.sub || null;
 }
+

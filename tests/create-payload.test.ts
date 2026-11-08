@@ -35,3 +35,4 @@ test('Agreement Creation Payload Assembler Integration Tests', async () => {
   assert.ok(args[4]); // deadline
   assert.ok(args[5]); // milestones array
 });
+

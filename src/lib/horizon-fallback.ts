@@ -73,3 +73,4 @@ export class HorizonFallbackService {
 }
 
 export const horizonFallback = new HorizonFallbackService();
+

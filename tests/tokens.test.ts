@@ -24,3 +24,4 @@ test('Token Preset Configuration Tests', async (t) => {
     assert.strictEqual(custom.contractId, customAddr);
   });
 });
+

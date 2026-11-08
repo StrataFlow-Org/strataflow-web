@@ -107,3 +107,4 @@ export function WalletModal({ isOpen, onClose, onSelectWallet, isLoading }: Wall
     </div>
   );
 }
+

@@ -20,3 +20,4 @@ test('Soroban Error Code Mapping Unit Tests', async () => {
   const fallback = SorobanTxPipeline.decodeErrorCode(999);
   assert.strictEqual(fallback, 'Contract error code: #999');
 });
+

@@ -26,3 +26,4 @@ test('API Client HTTP Unit Tests', async () => {
 
   await new Promise<void>((resolve) => server.close(() => resolve()));
 });
+

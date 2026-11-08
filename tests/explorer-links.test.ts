@@ -37,3 +37,4 @@ describe('Stellar Expert Explorer URL Generator Tests', () => {
     assert.ok(url.endsWith(sampleTx));
   });
 });
+
