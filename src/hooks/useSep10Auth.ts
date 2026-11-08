@@ -86,11 +86,21 @@ export function useSep10Auth() {
     setIsAuthenticated(false);
   }, []);
 
+  const refreshSession = useCallback(async (): Promise<boolean> => {
+    if (!address || !isConnected) return false;
+    if (isSessionValid() && getSessionAddress() === address) {
+      setIsAuthenticated(true);
+      return true;
+    }
+    return login();
+  }, [address, isConnected, login]);
+
   return {
     isAuthenticated,
     isAuthenticating,
     error,
     login,
     logout,
+    refreshSession,
   };
 }
