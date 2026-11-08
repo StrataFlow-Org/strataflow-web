@@ -1,4 +1,4 @@
-export const STROOPS_PER_XLM = 10_000_000n;
+export const STROOPS_PER_XLM = BigInt(10_000_000);
 
 /**
  * Converts stroops (integer smallest unit in Stellar) to human-readable XLM string
@@ -9,7 +9,7 @@ export function stroopsToXlm(stroops: bigint | string | number): string {
     const whole = val / STROOPS_PER_XLM;
     const remainder = val % STROOPS_PER_XLM;
 
-    if (remainder === 0n) {
+    if (remainder === BigInt(0)) {
       return whole.toString();
     }
 
@@ -25,7 +25,7 @@ export function stroopsToXlm(stroops: bigint | string | number): string {
  */
 export function xlmToStroops(xlm: string | number): bigint {
   const str = xlm.toString().trim();
-  if (!str || isNaN(Number(str))) return 0n;
+  if (!str || isNaN(Number(str))) return BigInt(0);
 
   const parts = str.split('.');
   const whole = BigInt(parts[0] || '0') * STROOPS_PER_XLM;
