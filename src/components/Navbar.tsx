@@ -36,7 +36,7 @@ export default function Navbar() {
           <a href="#" className="hover:text-white transition">Agreements</a>
           <a href="#" className="hover:text-white transition">Milestones</a>
           <a href="#" className="hover:text-white transition">Arbitration</a>
-          <a href="https://github.com/winningtalker-commits" target="_blank" rel="noreferrer" className="hover:text-white transition">GitHub</a>
+          <a href="https://github.com/StrataFlow-Org" target="_blank" rel="noreferrer" className="hover:text-white transition">GitHub</a>
         </nav>
 
         <div className="flex items-center space-x-3">
@@ -51,3 +51,4 @@ export default function Navbar() {
     </header>
   );
 }
+

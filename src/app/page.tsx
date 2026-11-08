@@ -22,7 +22,7 @@ export default function HomePage() {
             Create New Escrow
           </button>
           <a
-            href="https://github.com/winningtalker-commits/strataflow-contracts"
+            href="https://github.com/StrataFlow-Org/strataflow-contracts"
             target="_blank"
             rel="noreferrer"
             className="px-6 py-3 rounded-lg border border-brand-border bg-brand-surface text-neutral-200 hover:text-white hover:border-neutral-500 transition"
@@ -81,3 +81,4 @@ export default function HomePage() {
     </div>
   );
 }
+

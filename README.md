@@ -4,7 +4,7 @@
 [![Next.js](https://img.shields.io/badge/Next.js-14-black.svg)](https://nextjs.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-v3-38B2AC.svg)](https://tailwindcss.com/)
 
-> **Part of the [StrataFlow Protocol](https://github.com/winningtalker-commits) suite.**  
+> **Part of the [StrataFlow Protocol](https://github.com/StrataFlow-Org) suite.**  
 > Next.js non-custodial interface for managing programmable milestone escrows on Stellar.
 
 ---
@@ -47,3 +47,4 @@ Open [http://localhost:3000](http://localhost:3000) to view the dApp.
 ## 📄 License
 
 This repository is licensed under the [MIT License](LICENSE).
+

@@ -17,3 +17,4 @@ export function truncateAddress(address: string, chars = 4): string {
     address.length - chars
   )}`;
 }
+
