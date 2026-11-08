@@ -244,6 +244,107 @@ export class SorobanTxPipeline {
   public static encodeString(str: string): xdr.ScVal {
     return nativeToScVal(str, { type: 'string' });
   }
+
+  /**
+   * Prepares arguments for create_agreement contract invocation
+   */
+  public static buildCreateAgreementArgs(params: {
+    provider: string;
+    arbiter: string;
+    token: string;
+    totalAmount: bigint | string;
+    deadline: number;
+    milestoneDescriptions: string[];
+    milestoneAmounts: Array<bigint | string>;
+  }): xdr.ScVal[] {
+    const milestonesScVals = params.milestoneDescriptions.map((desc, idx) => {
+      const amount = params.milestoneAmounts[idx] || 0n;
+      return nativeToScVal({
+        description: desc,
+        amount: BigInt(amount),
+      });
+    });
+
+    return [
+      this.encodeAddress(params.provider),
+      this.encodeAddress(params.arbiter),
+      this.encodeAddress(params.token),
+      this.encodeI128(params.totalAmount),
+      this.encodeU64(params.deadline),
+      nativeToScVal(milestonesScVals),
+    ];
+  }
+
+  /**
+   * Prepares arguments for fund_agreement contract invocation
+   */
+  public static buildFundAgreementArgs(agreementId: bigint | string, amount: bigint | string): xdr.ScVal[] {
+    return [this.encodeU64(agreementId), this.encodeI128(amount)];
+  }
+
+  /**
+   * Prepares arguments for submit_milestone contract invocation
+   */
+  public static buildSubmitMilestoneArgs(
+    agreementId: bigint | string,
+    milestoneIndex: number,
+    proofHash: string
+  ): xdr.ScVal[] {
+    return [
+      this.encodeU64(agreementId),
+      nativeToScVal(milestoneIndex, { type: 'u32' }),
+      this.encodeString(proofHash),
+    ];
+  }
+
+  /**
+   * Prepares arguments for release_milestone contract invocation
+   */
+  public static buildReleaseMilestoneArgs(
+    agreementId: bigint | string,
+    milestoneIndex: number
+  ): xdr.ScVal[] {
+    return [
+      this.encodeU64(agreementId),
+      nativeToScVal(milestoneIndex, { type: 'u32' }),
+    ];
+  }
+
+  /**
+   * Prepares arguments for raise_dispute contract invocation
+   */
+  public static buildRaiseDisputeArgs(agreementId: bigint | string): xdr.ScVal[] {
+    return [this.encodeU64(agreementId)];
+  }
+
+  /**
+   * Prepares arguments for resolve_dispute contract invocation
+   */
+  public static buildResolveDisputeArgs(
+    agreementId: bigint | string,
+    clientAmount: bigint | string,
+    providerAmount: bigint | string
+  ): xdr.ScVal[] {
+    return [
+      this.encodeU64(agreementId),
+      this.encodeI128(clientAmount),
+      this.encodeI128(providerAmount),
+    ];
+  }
+
+  /**
+   * Prepares arguments for claim_timeout_refund contract invocation
+   */
+  public static buildClaimTimeoutRefundArgs(agreementId: bigint | string): xdr.ScVal[] {
+    return [this.encodeU64(agreementId)];
+  }
+
+  /**
+   * Prepares arguments for cancel_agreement contract invocation
+   */
+  public static buildCancelAgreementArgs(agreementId: bigint | string): xdr.ScVal[] {
+    return [this.encodeU64(agreementId)];
+  }
 }
 
 export const sorobanPipeline = new SorobanTxPipeline();
