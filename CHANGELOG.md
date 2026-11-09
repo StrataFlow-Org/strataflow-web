@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.2.0] - 2026-11-09
 
 ### Added & Hardened
+- **SEP-0001 Protocol Discoverability**: Implemented `public/.well-known/stellar.toml` and Next.js App Router handler `/.well-known/stellar.toml` with CORS and cache headers.
 - **Soroban Storage Keep-Alive (`bump_agreement_ttl`)**: Embedded direct storage TTL extension actions within the agreement console, safeguarding escrows from state archival.
 - **Multi-Gateway Deliverable Proof Viewer**: Enhanced `DeliverableProofViewer` with IPFS gateway mirrors, one-click CID copying, and clean SVG navigation glyphs.
 - **Arbiter Inactivity Fallback UI**: Added client dispute timeout refund triggers (`resolve_dispute_timeout`) for autonomous fund recovery when arbiters are unresponsive.

@@ -1,5 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert';
+import fs from 'fs';
+import path from 'path';
 import { Keypair } from '@stellar/stellar-sdk';
 import {
   isValidStellarAddress,
@@ -42,5 +44,13 @@ test('Stellar Address Utilities Unit Tests', async (t) => {
     assert.strictEqual(truncateAddress(''), '');
     assert.strictEqual(truncateAddress('ABC'), 'ABC');
   });
-});
 
+  await t.test('validates SEP-0001 stellar.toml configuration exists and defines protocol contract', () => {
+    const tomlPath = path.join(process.cwd(), 'public', '.well-known', 'stellar.toml');
+    assert.ok(fs.existsSync(tomlPath), 'public/.well-known/stellar.toml must exist');
+    const content = fs.readFileSync(tomlPath, 'utf8');
+    assert.ok(content.includes('VERSION="2.0.0"'));
+    assert.ok(content.includes('STRATAFLOW_ESCROW='));
+    assert.ok(content.includes('CDXVD3AA43SE2D52ZBJSH3RDKAPOYG6OCDAZGSQD6M5TCBQIG3HTLY6J'));
+  });
+});

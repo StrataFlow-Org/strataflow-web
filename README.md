@@ -3,8 +3,9 @@
 [![Stellar Soroban](https://img.shields.io/badge/Stellar-Soroban%20Native-blueviolet?style=for-the-badge&logo=stellar)](https://stellar.org)
 [![Next.js 14](https://img.shields.io/badge/Next.js-14.2-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![TypeScript 5](https://img.shields.io/badge/TypeScript-5.3-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+[![SEP-0001](https://img.shields.io/badge/SEP--0001-stellar.toml%20Verified-blueviolet?style=for-the-badge)](https://stellar.org)
 [![Freighter Ready](https://img.shields.io/badge/Freighter-v2.0-orange?style=for-the-badge)](https://www.freighter.app/)
+[![Tests Passing](https://img.shields.io/badge/Tests-143%2F143%20Passed-brightgreen?style=for-the-badge)](https://github.com/StrataFlow-Org/strataflow-web)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 [![CI Status](https://img.shields.io/github/actions/workflow/status/StrataFlow-Org/strataflow-web/ci.yml?branch=main&style=for-the-badge&label=CI)](https://github.com/StrataFlow-Org/strataflow-web/actions)
 
@@ -133,9 +134,9 @@ The agreement detail view automatically evaluates the connected wallet public ke
 
 ---
 
-## 🧪 Automated Test Suite (139 Tests Passing)
+## 🧪 Automated Test Suite (143 Tests Passing)
 
-The dApp includes 139 automated unit and integration tests executing natively on Node 20/22 without flaky browser dependencies:
+The dApp includes 143 automated unit and integration tests executing natively on Node 20/22 without flaky browser dependencies:
 
 ```bash
 npm test
