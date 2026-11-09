@@ -57,10 +57,16 @@ Open [http://localhost:3000](http://localhost:3000) to view the dApp.
 
 ## 🧪 Testing & Production Build
 
-Run the 79 automated unit and integration tests:
+Run the comprehensive automated unit and integration test suite (139 tests, 100% pass):
 
 ```bash
 npm test
+```
+
+Execute TypeScript typecheck & lint verification:
+
+```bash
+npm run lint
 ```
 
 Compile the optimized Next.js production bundle:
