@@ -92,69 +92,10 @@ export default function AgreementDetailPage() {
       if (res.success && res.data) {
         setAgreement(res.data);
       } else {
-        // Fallback default for preview
-        setAgreement({
-          id: `preview-${onChainId}`,
-          onChainId,
-          clientAddress: 'GBBD47IF6LWK7P7MDEVTESTWINNINGTALKER2026COMMITS',
-          providerAddress: 'GCP777PROVIDERTESTNETWINNINGTALKER2026XYZ',
-          arbiterAddress: 'GAK777ARBITERTESTNETWINNINGTALKER2026XYZ',
-          tokenAddress: 'CDLZ73VU7Y4Z45ETK26QU62NDXQJ2277NY2Y57C2ZFU7SS7M6HWT7G4H',
-          totalAmount: '6000000000',
-          balance: '4000000000',
-          status: 'FUNDED',
-          deadline: new Date(Date.now() + 86400000 * 14).toISOString(),
-          title: 'Soroban Indexer & Webhook Service Integration',
-          description: 'Production-ready milestone escrow with on-chain event stream and automated notifications.',
-          milestones: [
-            {
-              index: 0,
-              description: 'Phase 1: Architecture Blueprint & Soroban Interface Specs',
-              amount: '2000000000',
-              status: 'APPROVED',
-              proofHash: 'QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco',
-              submittedAt: new Date(Date.now() - 86400000 * 3).toISOString(),
-              approvedAt: new Date(Date.now() - 86400000 * 2).toISOString(),
-            },
-            {
-              index: 1,
-              description: 'Phase 2: Contract Implementation & Testnet Deployment',
-              amount: '2000000000',
-              status: 'SUBMITTED',
-              proofHash: 'bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi',
-              submittedAt: new Date(Date.now() - 86400000 * 1).toISOString(),
-            },
-            {
-              index: 2,
-              description: 'Phase 3: Integration Testing & Mainnet Audit Handover',
-              amount: '2000000000',
-              status: 'PENDING',
-            },
-          ],
-          events: [
-            {
-              type: 'MilestoneSubmitted',
-              ledger: 541092,
-              txHash: 'e42ba5566fbc2646d2a7c41e8c105cb83015bbf099411d331923055f5f72cf7e',
-              timestamp: new Date(Date.now() - 86400000 * 1).toISOString(),
-            },
-            {
-              type: 'MilestoneApproved',
-              ledger: 539201,
-              txHash: 'd9fba457a412b591b6bc420f12a95c38982f1b4a03498b894175399589a805fa',
-              timestamp: new Date(Date.now() - 86400000 * 2).toISOString(),
-            },
-            {
-              type: 'AgreementFunded',
-              ledger: 538110,
-              txHash: '2f50dde11504cf10a82643a6d71b80a71be70b43171350a417088b90c1e8e54e',
-              timestamp: new Date(Date.now() - 86400000 * 4).toISOString(),
-            },
-          ],
-        });
+        setAgreement(null);
       }
     } catch {
-      // ignore
+      setAgreement(null);
     } finally {
       setIsLoading(false);
     }
@@ -220,8 +161,8 @@ export default function AgreementDetailPage() {
 
   // 1. Fund Agreement
   const handleFundAgreement = async () => {
-    if (!agreement) return;
-    const args = SorobanTxPipeline.buildFundAgreementArgs(onChainId, agreement.totalAmount);
+    if (!agreement || !address) return;
+    const args = SorobanTxPipeline.buildFundAgreementArgs(onChainId, address);
     await executeContractCall('fund_agreement', args);
   };
 
@@ -246,11 +187,12 @@ export default function AgreementDetailPage() {
 
   // 4. Raise Dispute (Client or Provider)
   const handleRaiseDispute = async () => {
+    if (!address) return;
     const confirm = window.confirm(
       'Are you sure you want to raise a dispute? This will freeze escrow funds until the arbiter rules.'
     );
     if (!confirm) return;
-    const args = SorobanTxPipeline.buildRaiseDisputeArgs(onChainId);
+    const args = SorobanTxPipeline.buildRaiseDisputeArgs(onChainId, 0, address);
     await executeContractCall('raise_dispute', args);
   };
 

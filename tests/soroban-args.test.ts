@@ -4,12 +4,14 @@ import { Keypair } from '@stellar/stellar-sdk';
 import { SorobanTxPipeline } from '../src/lib/soroban-tx.js';
 
 test('Soroban ScVal Argument Serialization Unit Tests', async (t) => {
+  const client = Keypair.random().publicKey();
   const provider = Keypair.random().publicKey();
   const arbiter = Keypair.random().publicKey();
   const token = 'CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2KM';
 
   await t.test('builds valid create_agreement ScVal arguments', () => {
     const args = SorobanTxPipeline.buildCreateAgreementArgs({
+      client,
       provider,
       arbiter,
       token,
@@ -23,7 +25,8 @@ test('Soroban ScVal Argument Serialization Unit Tests', async (t) => {
   });
 
   await t.test('builds valid fund_agreement ScVal arguments', () => {
-    const args = SorobanTxPipeline.buildFundAgreementArgs(101n, 1000000000n);
+    const funder = Keypair.random().publicKey();
+    const args = SorobanTxPipeline.buildFundAgreementArgs(101n, funder);
     assert.strictEqual(args.length, 2);
   });
 

@@ -149,6 +149,7 @@ export default function CreateAgreementPage() {
       const deadlineSec = Math.floor(Date.now() / 1000) + durationDays * 86400;
 
       const args = SorobanTxPipeline.buildCreateAgreementArgs({
+        client: address,
         provider: providerAddress,
         arbiter: arbiterAddress,
         token: tokenContract,
@@ -203,6 +204,7 @@ export default function CreateAgreementPage() {
       const deadlineSec = Math.floor(Date.now() / 1000) + durationDays * 86400;
 
       const args = SorobanTxPipeline.buildCreateAgreementArgs({
+        client: address,
         provider: providerAddress,
         arbiter: arbiterAddress,
         token: tokenConfig.contractId,

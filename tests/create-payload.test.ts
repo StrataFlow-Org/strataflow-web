@@ -5,6 +5,7 @@ import { SorobanTxPipeline } from '../src/lib/soroban-tx.js';
 import { xlmToStroops } from '../src/lib/account-balance.js';
 
 test('Agreement Creation Payload Assembler Integration Tests', async () => {
+  const client = Keypair.random().publicKey();
   const provider = Keypair.random().publicKey();
   const arbiter = Keypair.random().publicKey();
   const token = 'CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2KM';
@@ -18,6 +19,7 @@ test('Agreement Creation Payload Assembler Integration Tests', async () => {
   const deadlineSec = Math.floor(Date.now() / 1000) + 86400 * 30;
 
   const args = SorobanTxPipeline.buildCreateAgreementArgs({
+    client,
     provider,
     arbiter,
     token,
@@ -28,11 +30,11 @@ test('Agreement Creation Payload Assembler Integration Tests', async () => {
   });
 
   assert.strictEqual(args.length, 6);
-  assert.ok(args[0]); // provider
-  assert.ok(args[1]); // arbiter
-  assert.ok(args[2]); // token
-  assert.ok(args[3]); // totalAmount
-  assert.ok(args[4]); // deadline
-  assert.ok(args[5]); // milestones array
+  assert.ok(args[0]); // client
+  assert.ok(args[1]); // provider
+  assert.ok(args[2]); // arbiter
+  assert.ok(args[3]); // token
+  assert.ok(args[4]); // milestones array
+  assert.ok(args[5]); // deadline
 });
 
