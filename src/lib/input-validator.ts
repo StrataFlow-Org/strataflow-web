@@ -10,6 +10,12 @@ export function sanitizeInputText(input: string): string {
     .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
     .replace(/on\w+\s*=\s*(?:["'][^"']*["']|[^\s>]+)/gi, '')
     .replace(/javascript\s*:/gi, '')
+    .replace(/data\s*:/gi, '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;')
     .trim();
 }
 
@@ -17,7 +23,6 @@ export function isValidDeliverableUrl(url: string): boolean {
   if (!url || typeof url !== 'string') return false;
 
   const trimmed = url.trim();
-  if (trimmed.length > 128) return false;
 
   // Allow IPFS URIs: ipfs://Qm... or ipfs://bafy...
   if (trimmed.startsWith('ipfs://')) {
@@ -71,8 +76,8 @@ export function validateMilestoneInput(description: string, amount: number | str
   if (cleanDesc.length < 3) {
     errors.push('Milestone description must be at least 3 characters long.');
   }
-  if (cleanDesc.length > 256) {
-    errors.push('Milestone description cannot exceed 256 characters.');
+  if (cleanDesc.length > 500) {
+    errors.push('Milestone description cannot exceed 500 characters.');
   }
 
   const numericAmount = Number(amount);
