@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.2.1] - 2026-11-09
+
+### Security Hardening & Optimization
+- **Next.js Framework Hardening**: Upgraded Next.js to `^14.2.35` mitigating upstream cache key and server component denial-of-service advisories.
+- **Dependency Hygiene**: Pruned 575 unused transitive packages, dramatically reducing lockfile attack surface and build overhead.
+- **Audit Verification**: Passed full 143-test automated test suite across all 17 component and unit test suites with 100% pass rate.
+
 ## [1.2.0] - 2026-11-09
 
 ### Added & Hardened
