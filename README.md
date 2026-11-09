@@ -8,8 +8,10 @@
 [![Tests Passing](https://img.shields.io/badge/Tests-143%2F143%20Passed-brightgreen?style=for-the-badge)](https://github.com/StrataFlow-Org/strataflow-web)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 [![CI Status](https://img.shields.io/github/actions/workflow/status/StrataFlow-Org/strataflow-web/ci.yml?branch=main&style=for-the-badge&label=CI)](https://github.com/StrataFlow-Org/strataflow-web/actions)
+[![Live Vercel Deployment](https://img.shields.io/badge/Vercel-strataflow--web.vercel.app-black?style=for-the-badge&logo=vercel)](https://strataflow-web.vercel.app)
 
 > **Non-Custodial Decentralized Application for Trustless Milestone Escrows on Stellar & Soroban.**  
+> 🌐 **Live Production Application:** [https://strataflow-web.vercel.app](https://strataflow-web.vercel.app)  
 > Empowers contractors, clients, and arbiters to govern programmable escrow payments with zero custody risk, automated timeout refunds, and real-time on-chain arbitration.
 
 ---
@@ -55,6 +57,8 @@ The application interacts directly with the verified StrataFlow core contract de
 
 | Parameter | Value | Explorer Link |
 |---|---|---|
+| **Live Production DApp** | `https://strataflow-web.vercel.app` | [Launch StrataFlow DApp](https://strataflow-web.vercel.app) |
+| **SEP-0001 Config** | `https://strataflow-web.vercel.app/.well-known/stellar.toml` | [View stellar.toml](https://strataflow-web.vercel.app/.well-known/stellar.toml) |
 | **Contract ID** | `CDXVD3AA43SE2D52ZBJSH3RDKAPOYG6OCDAZGSQD6M5TCBQIG3HTLY6J` | [View on StellarExpert](https://stellar.expert/explorer/testnet/contract/CDXVD3AA43SE2D52ZBJSH3RDKAPOYG6OCDAZGSQD6M5TCBQIG3HTLY6J) |
 | **Network** | Stellar Testnet (`Test SDF Network ; September 2015`) | [Network Status](https://soroban-testnet.stellar.org) |
 | **RPC Endpoint** | `https://soroban-testnet.stellar.org` | [Stellar Lab Inspector](https://lab.stellar.org/r/testnet/contract/CDXVD3AA43SE2D52ZBJSH3RDKAPOYG6OCDAZGSQD6M5TCBQIG3HTLY6J) |
@@ -201,8 +205,14 @@ npm start
 
 ## 🚢 Deployment Guide
 
-### Vercel (Recommended)
-1. Import the repository `StrataFlow-Org/strataflow-web` in the Vercel Dashboard.
+### Vercel (Active Production)
+The frontend dApp is deployed and active in production:
+- **Production URL**: [https://strataflow-web.vercel.app](https://strataflow-web.vercel.app)
+- **Deployment Platform**: Vercel Edge Network
+- **Build Target**: Next.js 14 App Router (Zero-custody client-side execution)
+
+To deploy your own fork:
+1. Import the repository in the Vercel Dashboard.
 2. Select **Next.js** framework preset.
 3. Configure Environment Variables matching `.env.example`.
 4. Deploy! All routes are statically pre-rendered with dynamic client-side RPC fallbacks.

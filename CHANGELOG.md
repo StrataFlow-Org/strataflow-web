@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.2.1] - 2026-11-09
 
-### Security Hardening & Optimization
+### Production Deployment & Hardening
+- **Live Vercel Production Deployment**: Deployed production dApp to [https://strataflow-web.vercel.app](https://strataflow-web.vercel.app) with edge CDN routing and SEP-0001 discoverability.
 - **Next.js Framework Hardening**: Upgraded Next.js to `^14.2.35` mitigating upstream cache key and server component denial-of-service advisories.
 - **Dependency Hygiene**: Pruned 575 unused transitive packages, dramatically reducing lockfile attack surface and build overhead.
 - **Audit Verification**: Passed full 143-test automated test suite across all 17 component and unit test suites with 100% pass rate.
