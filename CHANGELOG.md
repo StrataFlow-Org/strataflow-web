@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.2.0] - 2026-11-09
+
+### Added & Hardened
+- **Soroban Storage Keep-Alive (`bump_agreement_ttl`)**: Embedded direct storage TTL extension actions within the agreement console, safeguarding escrows from state archival.
+- **Multi-Gateway Deliverable Proof Viewer**: Enhanced `DeliverableProofViewer` with IPFS gateway mirrors, one-click CID copying, and clean SVG navigation glyphs.
+- **Arbiter Inactivity Fallback UI**: Added client dispute timeout refund triggers (`resolve_dispute_timeout`) for autonomous fund recovery when arbiters are unresponsive.
+- **Dispute Verdict Evidentiary Hashing**: Enabled arbiters to submit verdict IPFS hashes/audit records on-chain (`resolve_dispute_with_verdict`).
+- **Typed Pipeline Builders**: Added `buildBumpAgreementTtlArgs`, `buildResolveDisputeTimeoutArgs`, and `buildResolveDisputeWithVerdictArgs` in `SorobanTxPipeline`.
+
 ## [1.1.0] - 2026-11-09
 
 ### Security Hardening

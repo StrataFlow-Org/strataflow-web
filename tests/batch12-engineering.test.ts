@@ -64,6 +64,9 @@ describe('Batch 12 Codebase & Engineering Tests', () => {
   it('IpfsUrlResolver: handles IPFS CIDs and prefixes', () => {
     const url = IpfsUrlResolver.toGatewayUrl('ipfs://bafybeic5');
     assert.ok(url.startsWith('https://ipfs.io/ipfs/bafybeic5'));
+    const fallbacks = IpfsUrlResolver.getFallbackGatewayUrls('bafybeic5');
+    assert.equal(fallbacks.length, 4);
+    assert.ok(fallbacks.some((u) => u.includes('cloudflare-ipfs.com')));
   });
 
   it('StatusStyles: maps milestone statuses to UI tokens', () => {

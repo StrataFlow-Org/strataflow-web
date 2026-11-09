@@ -1,16 +1,16 @@
 ---
 name: Feature Request
-about: Suggest a new UI feature or wallet integration for StrataFlow Web
+about: Suggest a user experience or wallet workflow improvement for StrataFlow
 title: '[Feature]: '
 labels: ['enhancement']
 assignees: ''
 ---
 
-### 💡 Feature Description
+### Feature Description
 <!-- Clear and concise description of the proposal. -->
 
-### 🎯 Problem it Solves
-<!-- Is your feature request related to a problem or user experience friction? -->
+### Problem it Solves
+<!-- Is your feature request related to a usability hurdle or missing workflow? -->
 
-### 🛠️ Proposed Solution / Implementation
-<!-- Outline how this could be implemented within the Next.js and Tailwind architecture. -->
+### Proposed Solution / Implementation
+<!-- Outline how this could be implemented in the Next.js / Tailwind / Stellar Wallets Kit interface. -->

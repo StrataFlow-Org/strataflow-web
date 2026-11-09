@@ -395,6 +395,40 @@ export class SorobanTxPipeline {
   public static buildCancelAgreementArgs(agreementId: bigint | string): xdr.ScVal[] {
     return [this.encodeU64(agreementId)];
   }
+
+  /**
+   * Prepares arguments for bump_agreement_ttl contract invocation:
+   * bump_agreement_ttl(agreement_id: u64)
+   */
+  public static buildBumpAgreementTtlArgs(agreementId: bigint | string): xdr.ScVal[] {
+    return [this.encodeU64(agreementId)];
+  }
+
+  /**
+   * Prepares arguments for resolve_dispute_timeout contract invocation:
+   * resolve_dispute_timeout(agreement_id: u64)
+   */
+  public static buildResolveDisputeTimeoutArgs(agreementId: bigint | string): xdr.ScVal[] {
+    return [this.encodeU64(agreementId)];
+  }
+
+  /**
+   * Prepares arguments for resolve_dispute_with_verdict contract invocation:
+   * resolve_dispute_with_verdict(agreement_id: u64, client_amount: i128, provider_amount: i128, verdict_hash: String)
+   */
+  public static buildResolveDisputeWithVerdictArgs(
+    agreementId: bigint | string,
+    clientAmount: bigint | string,
+    providerAmount: bigint | string,
+    verdictHash: string
+  ): xdr.ScVal[] {
+    return [
+      this.encodeU64(agreementId),
+      this.encodeI128(clientAmount),
+      this.encodeI128(providerAmount),
+      this.encodeString(verdictHash),
+    ];
+  }
 }
 
 export const sorobanPipeline = new SorobanTxPipeline();

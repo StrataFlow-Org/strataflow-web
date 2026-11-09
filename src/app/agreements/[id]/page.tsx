@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import {
   Shield,
+  ShieldCheck,
   Clock,
   CheckCircle2,
   AlertTriangle,
@@ -26,6 +27,7 @@ import { SorobanTxPipeline, sorobanPipeline } from '../../../lib/soroban-tx';
 import { STELLAR_CONFIG } from '../../../lib/stellar';
 import { getExplorerTxUrl, getExplorerAccountUrl } from '../../../lib/stellar-network';
 import { apiClient } from '../../../lib/api-client';
+import { DeliverableProofViewer } from '../../../components/DeliverableProofViewer';
 
 interface MilestoneDetail {
   index: number;
@@ -81,6 +83,7 @@ export default function AgreementDetailPage() {
 
   // Dispute resolution sliders
   const [disputeClientShare, setDisputeClientShare] = useState<number>(50);
+  const [verdictProofInput, setVerdictProofInput] = useState<string>('');
 
   const fetchAgreement = useCallback(async () => {
     setIsLoading(true);
@@ -203,8 +206,18 @@ export default function AgreementDetailPage() {
     const clientAmount = (totalBal * BigInt(disputeClientShare)) / 100n;
     const providerAmount = totalBal - clientAmount;
 
-    const args = SorobanTxPipeline.buildResolveDisputeArgs(onChainId, clientAmount, providerAmount);
-    await executeContractCall('resolve_dispute', args);
+    if (verdictProofInput.trim()) {
+      const args = SorobanTxPipeline.buildResolveDisputeWithVerdictArgs(
+        onChainId,
+        clientAmount,
+        providerAmount,
+        verdictProofInput.trim()
+      );
+      await executeContractCall('resolve_dispute_with_verdict', args);
+    } else {
+      const args = SorobanTxPipeline.buildResolveDisputeArgs(onChainId, clientAmount, providerAmount);
+      await executeContractCall('resolve_dispute', args);
+    }
   };
 
   // 6. Claim Timeout Refund
@@ -219,6 +232,22 @@ export default function AgreementDetailPage() {
     if (!confirm) return;
     const args = SorobanTxPipeline.buildCancelAgreementArgs(onChainId);
     await executeContractCall('cancel_agreement', args);
+  };
+
+  // 8. Bump Persistent Storage TTL (Keep Alive)
+  const handleBumpTtl = async () => {
+    const args = SorobanTxPipeline.buildBumpAgreementTtlArgs(onChainId);
+    await executeContractCall('bump_agreement_ttl', args);
+  };
+
+  // 9. Resolve Dispute Timeout (Client recovery if arbiter inactive)
+  const handleResolveDisputeTimeout = async () => {
+    const confirm = window.confirm(
+      'Claim dispute timeout refund? If the dispute window has elapsed without arbiter action, remaining balance will be refunded to the client.'
+    );
+    if (!confirm) return;
+    const args = SorobanTxPipeline.buildResolveDisputeTimeoutArgs(onChainId);
+    await executeContractCall('resolve_dispute_timeout', args);
   };
 
   if (isLoading) {
@@ -285,6 +314,17 @@ export default function AgreementDetailPage() {
             >
               <RefreshCw className="w-4 h-4" />
             </button>
+            {agreement.status !== 'CANCELLED' && agreement.status !== 'COMPLETED' && (
+              <button
+                onClick={handleBumpTtl}
+                disabled={isProcessing}
+                className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs font-semibold transition"
+                title="Bumps Soroban persistent storage TTL to prevent state archival"
+              >
+                <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                <span>Keep Alive (Bump TTL)</span>
+              </button>
+            )}
             {agreement.status === 'CREATED' && isClient && (
               <button
                 onClick={handleFundAgreement}
@@ -505,15 +545,10 @@ export default function AgreementDetailPage() {
                       </span>
 
                       {m.proofHash && (
-                        <a
-                          href={`https://ipfs.io/ipfs/${m.proofHash}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-1 text-blue-400 hover:underline font-mono"
-                        >
-                          <span>Deliverable Proof: {truncateAddress(m.proofHash, 6)}</span>
-                          <ExternalLink className="w-3 h-3" />
-                        </a>
+                        <div className="flex items-center gap-1.5 font-mono">
+                          <span className="text-slate-500">Deliverable:</span>
+                          <DeliverableProofViewer proofHash={m.proofHash} />
+                        </div>
                       )}
                     </div>
                   </div>
@@ -665,6 +700,21 @@ export default function AgreementDetailPage() {
               </div>
             </div>
 
+            {isArbiter && (
+              <div>
+                <label className="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                  Optional Verdict Proof / Reason Hash (IPFS CID)
+                </label>
+                <input
+                  type="text"
+                  value={verdictProofInput}
+                  onChange={(e) => setVerdictProofInput(e.target.value.trim())}
+                  placeholder="bafy... or Qm... (evidentiary verdict record)"
+                  className="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs font-mono focus:outline-none focus:border-amber-500"
+                />
+              </div>
+            )}
+
             {isArbiter ? (
               <button
                 onClick={handleResolveDispute}
@@ -677,6 +727,24 @@ export default function AgreementDetailPage() {
               <p className="text-xs text-slate-500 italic">
                 Only the designated arbiter ({truncateAddress(agreement.arbiterAddress, 4)}) can execute dispute settlements.
               </p>
+            )}
+
+            {isClient && agreement.status === 'DISPUTED' && (
+              <div className="mt-6 pt-4 border-t border-slate-800">
+                <h4 className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
+                  Arbiter Inactivity Fallback
+                </h4>
+                <p className="text-xs text-slate-400 mb-3">
+                  If the designated arbiter remains unresponsive past the dispute timeout window, the client may invoke the contract timeout refund to recover remaining escrow funds.
+                </p>
+                <button
+                  onClick={handleResolveDisputeTimeout}
+                  disabled={isProcessing}
+                  className="px-4 py-2 rounded-xl bg-rose-600/20 border border-rose-500/30 text-rose-300 hover:bg-rose-600/30 text-xs font-semibold transition"
+                >
+                  Claim Dispute Timeout Refund
+                </button>
+              </div>
             )}
           </div>
         </div>

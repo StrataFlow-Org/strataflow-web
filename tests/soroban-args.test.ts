@@ -44,4 +44,24 @@ test('Soroban ScVal Argument Serialization Unit Tests', async (t) => {
     const args = SorobanTxPipeline.buildResolveDisputeArgs(101n, 600000000n, 400000000n);
     assert.strictEqual(args.length, 3);
   });
+
+  await t.test('builds valid bump_agreement_ttl ScVal arguments', () => {
+    const args = SorobanTxPipeline.buildBumpAgreementTtlArgs(101n);
+    assert.strictEqual(args.length, 1);
+  });
+
+  await t.test('builds valid resolve_dispute_timeout ScVal arguments', () => {
+    const args = SorobanTxPipeline.buildResolveDisputeTimeoutArgs(101n);
+    assert.strictEqual(args.length, 1);
+  });
+
+  await t.test('builds valid resolve_dispute_with_verdict ScVal arguments', () => {
+    const args = SorobanTxPipeline.buildResolveDisputeWithVerdictArgs(
+      101n,
+      600000000n,
+      400000000n,
+      'bafybeic5verdict123456789'
+    );
+    assert.strictEqual(args.length, 4);
+  });
 });

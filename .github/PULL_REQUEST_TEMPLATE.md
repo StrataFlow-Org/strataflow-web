@@ -1,10 +1,10 @@
-## 📝 Summary of Changes
+## Summary of Changes
 <!-- Provide an overview of what this PR introduces and which issue it solves. -->
 Closes #<!-- ISSUE NUMBER -->
 
-## 🌊 Drips Wave Checklist
-- [ ] My code conforms to the code style and formatting standards.
-- [ ] Application compiles and builds cleanly (`npm run build`).
-- [ ] Verified responsive layout on both mobile and desktop screen sizes.
-- [ ] Interactive wallet triggers and error states function properly.
-- [ ] Follows StrataFlow design system palette and accessibility guidelines.
+## Protocol Contribution Checklist
+- [ ] My code conforms to project coding standards and linting rules (`npm run lint`).
+- [ ] I have run all automated tests (`npm test`) and they pass locally without errors.
+- [ ] Production build succeeds without errors (`npm run build`).
+- [ ] Tested across light/dark contrast modes and responsive viewport sizes.
+- [ ] No secrets, private keys, or credentials exposed.
