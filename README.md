@@ -1,6 +1,6 @@
 # StrataFlow Web 🌐
 
-[![Stellar Drips Wave](https://img.shields.io/badge/Stellar-Drips%20Wave%202026-blueviolet?style=for-the-badge&logo=stellar)](https://stellar.org)
+[![Stellar Soroban](https://img.shields.io/badge/Stellar-Soroban%20Native-blueviolet?style=for-the-badge&logo=stellar)](https://stellar.org)
 [![Next.js 14](https://img.shields.io/badge/Next.js-14.2-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![TypeScript 5](https://img.shields.io/badge/TypeScript-5.3-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
@@ -9,7 +9,7 @@
 [![CI Status](https://img.shields.io/github/actions/workflow/status/StrataFlow-Org/strataflow-web/ci.yml?branch=main&style=for-the-badge&label=CI)](https://github.com/StrataFlow-Org/strataflow-web/actions)
 
 > **Non-Custodial Decentralized Application for Trustless Milestone Escrows on Stellar & Soroban.**  
-> Built for the **Stellar Drips Wave** evaluation. Empowers contractors, clients, and arbiters to govern programmable escrow payments with zero custody risk, automated timeout refunds, and real-time on-chain arbitration.
+> Empowers contractors, clients, and arbiters to govern programmable escrow payments with zero custody risk, automated timeout refunds, and real-time on-chain arbitration.
 
 ---
 

@@ -20,7 +20,7 @@ export default function HomePage() {
       <div className="text-center max-w-3xl mx-auto mb-16">
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20 mb-6">
           <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-          <span>Stellar Drips Wave Participant &bull; Soroban v21 Protocol</span>
+          <span>Decentralized Escrow Protocol &bull; Soroban v21 Native</span>
         </div>
 
         <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight">
@@ -164,7 +164,7 @@ export default function HomePage() {
       {/* Footer */}
       <footer className="pt-12 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
         <div>
-          &copy; {new Date().getFullYear()} StrataFlow Protocol. Built for Stellar Drips Wave.
+          &copy; {new Date().getFullYear()} StrataFlow Protocol. Programmable Escrow Settlement on Stellar.
         </div>
         <div className="flex items-center gap-6">
           <a

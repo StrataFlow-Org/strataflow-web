@@ -1,6 +1,6 @@
 # Contributing to StrataFlow Web
 
-Thank you for your interest in contributing to **StrataFlow Web**! This project is an open-source decentralized application participating in the **Stellar Drips Wave**.
+Thank you for your interest in contributing to **StrataFlow Web**! This project is an open-source decentralized application built on the Stellar network.
 
 ---
 
