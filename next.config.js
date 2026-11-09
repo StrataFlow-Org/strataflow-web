@@ -38,6 +38,9 @@ const securityHeaders = [
       "img-src 'self' data: https://*",
       "font-src 'self' data:",
       "frame-ancestors 'none'",
+      "object-src 'none'",
+      "base-uri 'self'",
+      "form-action 'self'",
     ].join('; '),
   },
 ];
